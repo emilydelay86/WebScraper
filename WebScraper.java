@@ -6,6 +6,7 @@
 import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
@@ -110,6 +111,8 @@ public class WebScraper extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
+        JPanel panSouth = new JPanel();
+        panSouth.setLayout(new FlowLayout());
         /***********************************************************************/
         JButton btnSave = new JButton("Save to text");
         btnSave.setBackground(Color.RED);
@@ -118,7 +121,9 @@ public class WebScraper extends JFrame implements ActionListener {
         btnSave.setFont(f);
         ButtonHandler bh = new ButtonHandler();
         btnSave.addActionListener(bh);
-        c.add(btnSave,BorderLayout.LINE_START);
+        //c.add(btnSave,BorderLayout.NORTH);
+        panSouth.add(btnSave);
+        
         
         /***********************************************************************/
         JButton btnSaveJSON = new JButton("Save to JSON");
@@ -128,7 +133,10 @@ public class WebScraper extends JFrame implements ActionListener {
         btnSaveJSON.setFont(o);
         ButtonHandler bh2 = new ButtonHandler();
         btnSaveJSON.addActionListener(bh2);
-        c.add(btnSaveJSON,BorderLayout.SOUTH);
+        //c.add(btnSaveJSON,BorderLayout.SOUTH);
+        panSouth.add(btnSaveJSON);
+        c.add(panSouth, BorderLayout.SOUTH);
+        
         /***********************************************************************/
         JButton btnHelp = new JButton("Help");
         btnHelp.addActionListener(this);
@@ -147,3 +155,5 @@ public class WebScraper extends JFrame implements ActionListener {
 
     }
 }
+
+
