@@ -9,9 +9,11 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -22,12 +24,26 @@ class ButtonHandler implements ActionListener {
         //put action of button here
     }
 }
+class DrawingPanel extends JPanel {
+    /* JPanels draw themselves using
+     * public void paintComponent. 
+     */
+    @Override
+    public void paintComponent(Graphics g) {
+        // g is our drawing surface
+        super.paintComponent(g); // paint the background
+        g.fillOval(20, 20, 75, 50);
+        g.drawString("Data will go here", 100, 75);
+    }
+}
 public class WebScraper extends JFrame implements ActionListener {
+	
     public void setupMenu() {
         JMenuBar mbar = new JMenuBar();
         JMenu mnuFile = new JMenu("Web Scraper");
         
         JMenuItem miOpen = new JMenuItem("Open");
+        
         miOpen.addActionListener(new ActionListener() {
        
             public void actionPerformed(ActionEvent e) {
