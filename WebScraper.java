@@ -1,4 +1,7 @@
-/De Lay and Maierhofer 
+/*@author 
+ * De Lay and Maierhofer 
+ * main class
+ */
 
 import javax.swing.JFrame;
 import java.awt.Container;
