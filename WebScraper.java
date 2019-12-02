@@ -32,7 +32,6 @@ class DrawingPanel extends JPanel {
     public void paintComponent(Graphics g) {
         // g is our drawing surface
         super.paintComponent(g); // paint the background
-        g.fillOval(20, 20, 75, 50);
         g.drawString("Data will go here", 100, 75);
     }
 }
