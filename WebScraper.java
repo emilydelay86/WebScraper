@@ -3,7 +3,6 @@
  * De Lay and Maierhofer 
  * main class
  */
-
 import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.BorderLayout;
@@ -19,13 +18,18 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JFileChooser;
- 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+/***********************************************************************/
 class ButtonHandler implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //put action of button here
     }
 }
-class DrawingPanel extends JPanel {
+
+   class DrawingPanel extends JPanel {
+ 
     /* JPanels draw themselves using
      * public void paintComponent. 
      */
@@ -36,20 +40,29 @@ class DrawingPanel extends JPanel {
         g.drawString("Data will go here", 75, 75);
     }
 }
+   /***********************************************************************/
 public class WebScraper extends JFrame implements ActionListener {
+	/**
+	 * @author Emily 
+	 * sets up the menu bar on the top of the UI
+	 * options are file and help
+	 */
 	
     public void setupMenu() { //this sets up the menu 
         JMenuBar mbar = new JMenuBar();
         //JMenu mnuFile = new JMenu("Web Scraper");
         JMenu mnuFile = new JMenu("Web Scraper");
-		JMenuItem miExit = new JMenuItem("Exit");
-        JMenuItem miOpen = new JMenuItem("Open");
         
-        miOpen.addActionListener(new ActionListener() {
+		JMenuItem miExit = new JMenuItem("Exit");
+		JMenuItem miOpen = new JMenuItem("Open");
+		
+        miExit.addActionListener(new ActionListener() { //FOR THE EXIT BUTTON
             public void actionPerformed(ActionEvent e) {
             	System.exit(0);
             	
-                try {
+            }       
+            });     
+          /*      try {
                     JFileChooser jfc = new JFileChooser();
                     if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                         System.out.println(jfc.getSelectedFile().getPath());
@@ -57,29 +70,43 @@ public class WebScraper extends JFrame implements ActionListener {
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null,"OOF");
                 }
-            }
-        });
+            
+    */
         JMenu mnuhelp = new JMenu("Help");
-		JMenuItem miabout = new JMenuItem("About");
-        
-        mnuFile.add(miOpen);
+        JMenuItem miabout = new JMenuItem("About");
+        miabout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"This project was created by"
+						+ " De Lay and Maierhofer."
+						+ " Welcome to a program that takes in "
+						+ " data from a wesbite and has the option to save it to"
+						+ " a text or a json file.");
+
+			}
+		});
         //JMenuItem miExit = new JMenuItem("Exit");
         miExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
+    /***********************************************************************/
+        //mnuFile.add(miOpen);
         mnuFile.add(miExit); //exit
-        
         mbar.add(mnuFile); //file
-        
         setJMenuBar(mbar);
+        mnuhelp.add(miabout);
+        
+		mbar.add(mnuhelp);
+		setJMenuBar(mbar);
     }
     /***********************************************************************/
     public WebScraper() {
         // set up the look inside the constructor
         setTitle("Web Scraper");
-        setBounds(50,100,400,300);  // left = 50, top=100, width=400, height= 300
+        
+        setBounds(50,100,400,300); 
+        // left = 50, top=100, width=400, height= 300
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
@@ -101,24 +128,22 @@ public class WebScraper extends JFrame implements ActionListener {
         btnSaveJSON.setFont(o);
         ButtonHandler bh2 = new ButtonHandler();
         btnSaveJSON.addActionListener(bh2);
-        c.add(btnSaveJSON,BorderLayout.LINE_END);
+        c.add(btnSaveJSON,BorderLayout.SOUTH);
         /***********************************************************************/
-        
-  /*      btnNorth.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JButton btnThatExperienced = (JButton)e.getSource();
-                System.out.println(btnThatExperienced.getText());
-            } 
-        }); */
+        JButton btnHelp = new JButton("Help");
+        btnHelp.addActionListener(this);
+
         setupMenu(); 
     } 
     /***********************************************************************/
-    public void actionPerformed(ActionEvent e) {
-
-       // JOptionPane.showMessageDialog(null,"");
-    }
+    @Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
     public static void main(String[] args) {
-    	WebScraper frm = new WebScraper();
+    		WebScraper frm = new WebScraper();
         frm.setVisible(true);  // show the frame
+
     }
 }
