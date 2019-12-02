@@ -52,10 +52,10 @@ public class WebScraper extends JFrame implements ActionListener {
     public void setupMenu() { //this sets up the menu 
         JMenuBar mbar = new JMenuBar();
         //JMenu mnuFile = new JMenu("Web Scraper");
-        JMenu mnuFile = new JMenu("Web Scraper");
-        
-		JMenuItem miExit = new JMenuItem("Exit");
-		JMenuItem miOpen = new JMenuItem("Open");
+        JMenu mnuFile = new JMenu("File");
+	    
+	JMenuItem miExit = new JMenuItem("Exit");
+	JMenuItem miOpen = new JMenuItem("Open");
 		
         miExit.addActionListener(new ActionListener() { //FOR THE EXIT BUTTON
             public void actionPerformed(ActionEvent e) {
