@@ -1,4 +1,5 @@
 /*@author 
+
  * De Lay and Maierhofer 
  * main class
  */
@@ -32,20 +33,22 @@ class DrawingPanel extends JPanel {
     public void paintComponent(Graphics g) {
         // g is our drawing surface
         super.paintComponent(g); // paint the background
-        g.drawString("Data will go here", 100, 75);
+        g.drawString("Data will go here", 75, 75);
     }
 }
 public class WebScraper extends JFrame implements ActionListener {
 	
-    public void setupMenu() {
+    public void setupMenu() { //this sets up the menu 
         JMenuBar mbar = new JMenuBar();
+        //JMenu mnuFile = new JMenu("Web Scraper");
         JMenu mnuFile = new JMenu("Web Scraper");
-        
+		JMenuItem miExit = new JMenuItem("Exit");
         JMenuItem miOpen = new JMenuItem("Open");
         
         miOpen.addActionListener(new ActionListener() {
-       
             public void actionPerformed(ActionEvent e) {
+            	System.exit(0);
+            	
                 try {
                     JFileChooser jfc = new JFileChooser();
                     if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
@@ -56,8 +59,11 @@ public class WebScraper extends JFrame implements ActionListener {
                 }
             }
         });
+        JMenu mnuhelp = new JMenu("Help");
+		JMenuItem miabout = new JMenuItem("About");
+        
         mnuFile.add(miOpen);
-        JMenuItem miExit = new JMenuItem("Exit");
+        //JMenuItem miExit = new JMenuItem("Exit");
         miExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
