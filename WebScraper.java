@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
+import java.net.URL;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
@@ -93,12 +95,14 @@ public class WebScraper extends JFrame implements ActionListener {
     public WebScraper() {
         // set up the look inside the constructor
         setTitle("Web Scraper");
-        
         setBounds(50,100,400,300); 
         // left = 50, top=100, width=400, height= 300
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        JTextArea showText = new JTextArea();
+        showText.setEditable(false);
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
+        c.add(showText, BorderLayout.CENTER);
         JPanel panSouth = new JPanel();
         panSouth.setLayout(new FlowLayout());
         /***********************************************************************/
@@ -142,9 +146,30 @@ public class WebScraper extends JFrame implements ActionListener {
 		JButton btnFetch = new JButton ("Fetch");
 		btnFetch.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
+        		Scanner sc = new Scanner(System.in);
+                String addr = sc.nextLine();
+                String line;
+        		try {
+                    URL link = new URL(addr);
+                    Scanner linksc = new Scanner(link.openStream());
+                    while (linksc.hasNextLine()) {
+                        line = linksc.nextLine();
+                        System.out.println(line);
+                    }
+                    
+                     // Takes in the chosen website from the user
+                     // and if unable to connect it will notify the user 
+                    
+                    
+                    linksc.close(); //closes 
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    System.out.println("Could not connect to chosen website."
+                  		+ "Use different website or try again");
+        	}
         	}
         });
+		
 		JPanel panNorth = new JPanel();
 		panNorth.setLayout(new FlowLayout());
 		panNorth.add(label);
@@ -160,10 +185,13 @@ public class WebScraper extends JFrame implements ActionListener {
 	}
     public static void main(String[] args) {
     	WebScraper frm = new WebScraper();
-        //ScreenScraper.Scrape(frm);
-        frm.setVisible(true); //show the frame
+    	frm.setVisible(true);
+    	//ScreenScraper.Scrape(frm);
+        //frm.setVisible(true); //show the frame
 
     }
 }
+
+
 
 
