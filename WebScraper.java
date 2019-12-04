@@ -3,22 +3,15 @@
  * De Lay and Maierhofer 
  * main class
  */
-import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JFileChooser;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -51,19 +44,12 @@ public class WebScraper extends JFrame implements ActionListener {
 	
     public void setupMenu() { //this sets up the menu 
         JMenuBar mbar = new JMenuBar();
-        //JMenu mnuFile = new JMenu("Web Scraper");
         JMenu mnuFile = new JMenu("File");
-	    
-	JMenuItem miExit = new JMenuItem("Exit");
-	JMenuItem miOpen = new JMenuItem("Open");
-		
-        miExit.addActionListener(new ActionListener() { //FOR THE EXIT BUTTON
+		JMenuItem miExit = new JMenuItem("Exit");
+		JMenuItem miOpen = new JMenuItem("Open");
+        miOpen.addActionListener(new ActionListener() { //FOR THE EXIT BUTTON
             public void actionPerformed(ActionEvent e) {
-            	System.exit(0);
-            	
-            }       
-            });     
-          /*      try {
+            	try {
                     JFileChooser jfc = new JFileChooser();
                     if (jfc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                         System.out.println(jfc.getSelectedFile().getPath());
@@ -71,8 +57,10 @@ public class WebScraper extends JFrame implements ActionListener {
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null,"OOF");
                 }
+            }
+                
+        });
             
-    */
         JMenu mnuhelp = new JMenu("Help");
         JMenuItem miabout = new JMenuItem("About");
         miabout.addActionListener(new ActionListener() {
@@ -142,6 +130,27 @@ public class WebScraper extends JFrame implements ActionListener {
         btnHelp.addActionListener(this);
 
         setupMenu(); 
+        
+        /**
+    	 * @author Mackenzie 
+    	 * creates the URL text field and fetch 
+    	 * button
+    	 */
+
+        JLabel label = new JLabel("Enter URL:");
+		JTextField urlToSearch = new JTextField(15);
+		JButton btnFetch = new JButton ("Fetch");
+		btnFetch.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
+		JPanel panNorth = new JPanel();
+		panNorth.setLayout(new FlowLayout());
+		panNorth.add(label);
+		panNorth.add(urlToSearch);
+		panNorth.add(btnFetch);
+		c.add(panNorth, BorderLayout.NORTH);
     } 
     /***********************************************************************/
     @Override
@@ -150,8 +159,9 @@ public class WebScraper extends JFrame implements ActionListener {
 		
 	}
     public static void main(String[] args) {
-    		WebScraper frm = new WebScraper();
-        frm.setVisible(true);  // show the frame
+    	WebScraper frm = new WebScraper();
+        //ScreenScraper.Scrape(frm);
+        frm.setVisible(true); //show the frame
 
     }
 }
