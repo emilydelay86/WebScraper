@@ -1,5 +1,4 @@
 /*@author 
-
  * De Lay and Maierhofer 
  * main class
  */
@@ -33,7 +32,7 @@ class ButtonHandler implements ActionListener {
     public void paintComponent(Graphics g) {
         // g is our drawing surface
         super.paintComponent(g); // paint the background
-        g.drawString("Data will go here", 75, 75);
+        g.drawString("Data will go here", 100, 75);
     }
 }
    /***********************************************************************/
@@ -43,8 +42,14 @@ public class WebScraper extends JFrame implements ActionListener {
 	 * sets up the menu bar on the top of the UI
 	 * options are file and help
 	 */
+	private String DataToShow; // this is what the text area will show
+	private JTextArea txaWords;  //  throughout the class
+	 
+	//JTextField txtTextToAdd = new JTextField(20); //i think we need  text feild 
 	
     public void setupMenu() { //this sets up the menu 
+    	DataToShow = ""; //got to set it to empty 
+    	
         JMenuBar mbar = new JMenuBar();
         JMenu mnuFile = new JMenu("File");
 		JMenuItem miExit = new JMenuItem("Exit");
@@ -75,6 +80,8 @@ public class WebScraper extends JFrame implements ActionListener {
 
 			}
 		});
+        
+      
         //JMenuItem miExit = new JMenuItem("Exit");
         miExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -100,7 +107,9 @@ public class WebScraper extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         JTextArea showText = new JTextArea();
         showText.setEditable(false);
+        
         Container c = getContentPane();
+        
         c.setLayout(new BorderLayout());
         c.add(showText, BorderLayout.CENTER);
         JPanel panSouth = new JPanel();
@@ -132,35 +141,59 @@ public class WebScraper extends JFrame implements ActionListener {
         /***********************************************************************/
         JButton btnHelp = new JButton("Help");
         btnHelp.addActionListener(this);
-
         setupMenu(); 
+        /***********************************************************************/
+    /*    JButton btnAddData = new JButton("Add text");
+        //still working on this this isnt 100 percent right
         
+        btnAddData.addActionListener(new ActionListener() { //the button that will make the data show to screen
+        	
+            public void actionPerformed(ActionEvent e) {
+                String data = txtTextToAdd.getText(); 
+                DataToShow = DataToShow + "\n" + data;
+                txaWords.setText(DataToShow);
+            }
+            
+        }); */
+        
+        /***********************************************************************/
         /**
     	 * @author Mackenzie 
     	 * creates the URL text field and fetch 
     	 * button
     	 */
-
+        
         JLabel label = new JLabel("Enter URL:");
 		JTextField urlToSearch = new JTextField(15);
 		JButton btnFetch = new JButton ("Fetch");
 		btnFetch.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
         		Scanner sc = new Scanner(System.in);
                 String addr = sc.nextLine();
                 String line;
         		try {
+        			
                     URL link = new URL(addr);
                     Scanner linksc = new Scanner(link.openStream());
                     while (linksc.hasNextLine()) {
                         line = linksc.nextLine();
                         System.out.println(line);
+                        // Takes in the chosen website from the user
+                        // and if unable to connect it will notify the user 
                     }
+                    //still working on this this isnt 100 percent right
+                    //im trying to get the data to show to the text field
                     
-                     // Takes in the chosen website from the user
-                     // and if unable to connect it will notify the user 
+                    String data = urlToSearch.getText(); 
+                    DataToShow = DataToShow + "\n" + data;
+                    txaWords.setText(DataToShow);
                     
-                    
+        /*            String data = urlToSearch.getText(); 
+                    DataToShow = DataToShow + "\n" + data;
+                    txaWords.setText(DataToShow);
+                    */
+          
                     linksc.close(); //closes 
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -168,6 +201,7 @@ public class WebScraper extends JFrame implements ActionListener {
                   		+ "Use different website or try again");
         	}
         	}
+        	
         });
 		
 		JPanel panNorth = new JPanel();
@@ -178,20 +212,24 @@ public class WebScraper extends JFrame implements ActionListener {
 		c.add(panNorth, BorderLayout.NORTH);
     } 
     /***********************************************************************/
+   
+    
+    /***********************************************************************/
     @Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
     public static void main(String[] args) {
+    
     	WebScraper frm = new WebScraper();
     	frm.setVisible(true);
-    	//ScreenScraper.Scrape(frm);
+    	ScreenScraper.Scrape(frm);
+    	frm.setVisible(true);
+     //	frm.setVisible(true);
         //frm.setVisible(true); //show the frame
 
     }
 }
-
-
 
 
