@@ -9,7 +9,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
@@ -94,7 +97,6 @@ public class WebScraper extends JFrame implements ActionListener {
         mbar.add(mnuFile); //file
         setJMenuBar(mbar);
         mnuhelp.add(miabout);
-        
 		mbar.add(mnuhelp);
 		setJMenuBar(mbar);
     }
@@ -168,33 +170,20 @@ public class WebScraper extends JFrame implements ActionListener {
 		JButton btnFetch = new JButton ("Fetch");
 		btnFetch.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
-        		Scanner sc = new Scanner(System.in);
-                String addr = sc.nextLine();
-                String line;
         		try {
-        			
-                    URL link = new URL(addr);
-                    Scanner linksc = new Scanner(link.openStream());
-                    while (linksc.hasNextLine()) {
-                        line = linksc.nextLine();
-                        System.out.println(line);
-                        // Takes in the chosen website from the user
-                        // and if unable to connect it will notify the user 
+        			//String data = urlToSearch.getText();
+                    URL url = new URL(urlToSearch.getText());
+                    URLConnection uconn = url.openConnection();
+                    BufferedReader br = new BufferedReader(
+                    		new InputStreamReader(uconn.getInputStream()));
+                    String urlText = "";
+                    String line;
+                    while((line = br.readLine()) != null){ //while there is a line in the bufferedreader and it's not empty
+                    	urlText += line;//add that line to the text of the URL 
                     }
-                    //still working on this this isnt 100 percent right
-                    //im trying to get the data to show to the text field
-                    
-                    String data = urlToSearch.getText(); 
-                    DataToShow = DataToShow + "\n" + data;
-                    txaWords.setText(DataToShow);
-                    
-        /*            String data = urlToSearch.getText(); 
-                    DataToShow = DataToShow + "\n" + data;
-                    txaWords.setText(DataToShow);
-                    */
-          
-                    linksc.close(); //closes 
+                    DataToShow = DataToShow + "\n" + urlText;//prints out the HTML formatting of the webpage to the TextArea
+                    showText.setText(DataToShow);                    
+                
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     System.out.println("Could not connect to chosen website."
@@ -221,15 +210,16 @@ public class WebScraper extends JFrame implements ActionListener {
 		
 	}
     public static void main(String[] args) {
-    
     	WebScraper frm = new WebScraper();
-    	frm.setVisible(true);
-    	ScreenScraper.Scrape(frm);
-    	frm.setVisible(true);
-     //	frm.setVisible(true);
-        //frm.setVisible(true); //show the frame
+    	frm.setVisible(true); //show the frame
+    	//ScreenScraper.Scrape(frm);
 
     }
 }
+
+
+
+
+
 
 
