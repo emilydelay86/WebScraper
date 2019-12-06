@@ -7,7 +7,11 @@ import java.util.ArrayList;
  * and saves the data to text file and to json 
  */
 public class Writer {
-	   public static boolean writeToTextFile(String fname,   //write to txt file - 
+	/*
+	 * this has to take in the array list 
+	 * 
+	 */
+	   public static boolean writeToTextFile(String fname,  //write to txt file - 
 			    ArrayList<ScreenScraper> datapulled) {
 		   //still figurig this out its not 100 percent right 
 			        try {
