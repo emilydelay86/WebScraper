@@ -3,7 +3,10 @@
  * main class
  */
 //use this website owo
-//http://www.romeovillehumanesociety.com/cats.html
+
+//http://ws.petango.com/webservices/adoptablesearch/wsAdoptableAnimals
+//.aspx?species=Cat&sex=A&agegroup=All&onhold=A&orderby=ID&colnum=3&AuthKey=rqvr
+//5d02qw0dcgh571j141rdbpwtpfpgvadyf1d1cnadynl3m4
 import java.awt.Container;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -15,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
@@ -178,11 +182,15 @@ public class WebScraper extends JFrame implements ActionListener {
                     URLConnection uconn = url.openConnection();
                     BufferedReader br = new BufferedReader(
                     		new InputStreamReader(uconn.getInputStream()));
+                    
                     String urlText = "";
+                    
                     String line;
-                    while((line = br.readLine()) != null){ //while there is a line in the bufferedreader and it's not empty
+                    while((line = br.readLine()) != null){ 
+                    	//while there is a line in the bufferedreader and it's not empty
                     	urlText += line;//add that line to the text of the URL 
                     }
+                    
                     DataToShow = DataToShow + "\n" + urlText;//prints out the HTML formatting of the webpage to the TextArea
                     showText.setText(DataToShow);                    
                 
@@ -192,12 +200,13 @@ public class WebScraper extends JFrame implements ActionListener {
                       		+ "Use different website or try again";
                 	DataToShow = DataToShow + "\n" + fail;
                 	showText.setText(DataToShow); 
-                 	/*
+                	/*
                 	 * if unable to connect to site
                 	 * or if it is invalid, then the 
                 	 * program returns a msg showing it failed otherwise the data shows. 
-                	 */        	
-			}
+                	 */
+               
+        	}
         	}
         	
         });
@@ -219,14 +228,13 @@ public class WebScraper extends JFrame implements ActionListener {
 		
 	}
     public static void main(String[] args) {
+    	ArrayList<ScreenScraper> datapulled = new ArrayList<ScreenScraper>(); //creates an arraylist
     	WebScraper frm = new WebScraper();
     	frm.setVisible(true); //show the frame
     	//ScreenScraper.Scrape(frm);
 
     }
 }
-
-
 
 
 
