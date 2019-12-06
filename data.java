@@ -25,4 +25,8 @@ public class data {
 	public void setData(String data) {
 		this.data = data;
 	}
+	@Override
+	public String toString() {
+		return String.format("%s, %s", TxtBox, data);
+	}
 }
