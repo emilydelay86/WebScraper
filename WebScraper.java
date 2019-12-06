@@ -192,8 +192,12 @@ public class WebScraper extends JFrame implements ActionListener {
                       		+ "Use different website or try again";
                 	DataToShow = DataToShow + "\n" + fail;
                 	showText.setText(DataToShow); 
-               
-        	}
+                 	/*
+                	 * if unable to connect to site
+                	 * or if it is invalid, then the 
+                	 * program returns a msg showing it failed otherwise the data shows. 
+                	 */        	
+			}
         	}
         	
         });
