@@ -133,6 +133,13 @@ public class WebScraper extends JFrame implements ActionListener {
         //c.add(btnSave,BorderLayout.NORTH);
         panSouth.add(btnSave);
         
+        btnSave.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            //	Writer.writeToTextFile(
+             //action of the save to text button will go here
+            }
+        });
+        
         
         /***********************************************************************/
         JButton btnSaveJSON = new JButton("Save to JSON");
@@ -145,6 +152,12 @@ public class WebScraper extends JFrame implements ActionListener {
         //c.add(btnSaveJSON,BorderLayout.SOUTH);
         panSouth.add(btnSaveJSON);
         c.add(panSouth, BorderLayout.SOUTH);
+        
+        btnSaveJSON.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+             //action of the save to JSON button will go here
+            }
+        });
         
         /***********************************************************************/
         JButton btnHelp = new JButton("Help");
@@ -235,6 +248,7 @@ public class WebScraper extends JFrame implements ActionListener {
 
     }
 }
+
 
 
 
