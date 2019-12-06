@@ -2,6 +2,8 @@
  * De Lay and Maierhofer 
  * main class
  */
+//use this website owo
+//http://www.romeovillehumanesociety.com/cats.html
 import java.awt.Container;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -185,9 +187,12 @@ public class WebScraper extends JFrame implements ActionListener {
                     showText.setText(DataToShow);                    
                 
                 } catch (Exception ex) {
-                    ex.printStackTrace();
-                    System.out.println("Could not connect to chosen website."
-                  		+ "Use different website or try again");
+                  //  ex.printStackTrace();
+                    String fail = "Could not connect to chosen website."
+                      		+ "Use different website or try again";
+                	DataToShow = DataToShow + "\n" + fail;
+                	showText.setText(DataToShow); 
+               
         	}
         	}
         	
