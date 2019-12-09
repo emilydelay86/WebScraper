@@ -1,66 +1,77 @@
 //the getters and setters will go in this class
 public class data {
-	private String name, number, animal, gender, breed, age, id;
+	private String tname, tnumber, tanimal, tgender, tbreed, tage, tid;
 
 	public String getName() {
-		return name;
+		return tname;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.tname = tname;
 	}
 	public String getNumber() {
-		return number;
+		return tnumber;
 	}
 	public void setNumber(String number) {
-		this.number = number;
+		this.tnumber = tnumber;
 	}
 	public String getAnimal() {
-		return animal;
+		return tanimal;
 	}
 	public void setAnimal(String animal) {
-		this.animal = animal;
+		this.tanimal = tanimal;
 	}
 	public String getGender() {
-		return gender;
+		return tgender;
 	}
 	public void setGender(String gender) {
-		this.gender = gender;
+		this.tgender = tgender;
 	}
 	public String getBreed() {
-		return breed;
+		return tbreed;
 	}
 	public void setBreed(String breed) {
-		this.breed = breed;
+		this.tbreed = tbreed;
 	}
 	public String getAge() {
-		return age;
+		return tage;
 	}
 	public void setAge(String age) {
-		this.age = age;
+		this.tage = tage;
 	}
 	public String getId() {
-		return id;
+		return tid;
 	}
 	public void setId(String id) {
-		this.id = id;
+		this.tid = tid;
 	}
-	//gotta make the constructor 
-	public data(String name, String number, String animal,
-			String gender, String breed, String age, String id) {
+	
+	public data() {
+		tname = "";
+		tnumber = "";
+		tanimal = "";
+		tgender = "";
+		tbreed = "";
+		tage = "";
+		tid = "";
+	}
+ 
+	public data(String tname, String tnumber, String tanimal,
+			String tgender, String tbreed, String tage, String tid) {
 	//setfunction(variable)
-		setName(name);
-		setNumber(number);
-		setAnimal(animal);
-		setGender(gender);
-		setBreed(breed);
-		setAge(age);
-		setId(id);
+		setName(tname);
+		setNumber(tnumber);
+		setAnimal(tanimal);
+		setGender(tgender);
+		setBreed(tbreed);
+		setAge(tage);
+		setId(tid);
 		
 	}
 	
 	@Override
 	public String toString() {
 		return String.format("%s, %s, %s, %s, %s, %s",
-				name, number, animal, gender, breed, age, id );
+				tname, tnumber, tanimal, tgender, tbreed, tage, tid );
 	}
 }
+
