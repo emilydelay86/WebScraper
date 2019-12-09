@@ -207,8 +207,8 @@ public class WebScraper extends JFrame implements ActionListener {
                     		new InputStreamReader(uconn.getInputStream()));
                     
                     String urlText = "";
-                    
                     String line;
+                    
                     while((line = br.readLine()) != null){ 
                     	//while there is a line in the bufferedreader and it's not empty
                     urlText = line;//add that line to the text of the URL 
@@ -216,34 +216,45 @@ public class WebScraper extends JFrame implements ActionListener {
                     String htmlString = urlText;
                     Document html = Jsoup.parse(urlText);
                     //System.out.print(html);
+                    ArrayList<data> datapulled = new ArrayList<data>();
+                    String tname=null, tnumber=null, tanimal=null, tgender=null, tbreed=null, tage=null, tid=null;
                     for (Element name : html.select("a[href]")) {
-                    	System.out.println(name.text());
-                    	//showText.setText(name.text());
+                    	tname = name.text();
+                    	System.out.println(tname);
                     }
                     for (Element number : html.select("div.list-animal-id")) {
-                    	System.out.println(number.text());
+                    	tnumber = number.text();
+                    	//System.out.println(tnumber);
                     }
                     for (Element animal : html.select("div.list-anima-species")) { //"anima" because there is a typo in the HTML
-                    	System.out.println(animal.text());
+                    	tanimal = animal.text();
+                    	//System.out.println(tanimal);
                     }
                     for (Element gender : html.select("div.list-animal-sexSN")) {
-                    	System.out.println(gender.text());
+                    	tgender = gender.text();
+                    	//System.out.println(tgender);
                     }
                     for (Element breed : html.select("div.list-animal-breed")) {
-                    	System.out.println(breed.text());
+                    	tbreed = breed.text();
+                    	//System.out.println(tbreed);
                     }
                     for (Element age : html.select("div.list-animal-age")) {
-                    	System.out.println(age.text());
+                    	tage = age.text();
+                    	//System.out.println(tage);
                     }
                     for (Element id : html.select("div.list-animal-detail")) {
-                    	System.out.println(id.text());
+                    	tid = id.text();
+                    	//System.out.println(tid);
                     }
-                    //showText.setText(name.text());
+                    datapulled.add(new data(tname, tnumber, tanimal, tgender, tbreed, tage, tid));
+                    //System.out.print(datapulled);
                     }
+                    
                     
                    // DataToShow = DataToShow + "\n" + urlText;//prints out the HTML formatting of the webpage to the TextArea
                    // showText.setText(DataToShow); 
                     showText.setText("Connection Successful");
+                   //return datapulled;
                   
                 } catch (Exception ex) {
                   ex.printStackTrace();
@@ -262,7 +273,8 @@ public class WebScraper extends JFrame implements ActionListener {
         	
         });
 		
-    } 
+    }
+    
     
     /***********************************************************************/
    
@@ -274,14 +286,19 @@ public class WebScraper extends JFrame implements ActionListener {
 		
 	}
     public static void main(String[] args) {
-    	ArrayList<ScreenScraper> datapulled = new ArrayList<ScreenScraper>(); //creates an arraylist
+    	//ArrayList<data> datapulled = new ArrayList<data>(); //creates an arraylist
     	URL url = null;
     	WebScraper frm = new WebScraper();
+    	//for (data d : datapulled) {
+    	//	System.out.println(d);
+    	//}
     	frm.setVisible(true); //show the frame
-		//ScreenScraper.Scrape(frm);
+    	
+		
 
     }
 }
+
 
 
 
