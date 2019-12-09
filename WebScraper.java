@@ -21,6 +21,10 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,7 +58,7 @@ public class WebScraper extends JFrame implements ActionListener {
 	private String DataToShow; // this is what the text area will show
 	private JTextArea txaWords;  //  throughout the class
 	 
-	//JTextField txtTextToAdd = new JTextField(20); //i think we need  text feild 
+	//JTextField txtTextToAdd = new JTextField(20); //i think we need  text field 
 	
     public void setupMenu() { //this sets up the menu 
     	DataToShow = ""; //got to set it to empty 
@@ -187,6 +191,12 @@ public class WebScraper extends JFrame implements ActionListener {
         JLabel label = new JLabel("Enter URL:");
 		JTextField urlToSearch = new JTextField(15);
 		JButton btnFetch = new JButton ("Fetch");
+		JPanel panNorth = new JPanel();
+		panNorth.setLayout(new FlowLayout());
+		panNorth.add(label);
+		panNorth.add(urlToSearch);
+		panNorth.add(btnFetch);
+		c.add(panNorth, BorderLayout.NORTH);
 		btnFetch.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		try {
@@ -201,16 +211,44 @@ public class WebScraper extends JFrame implements ActionListener {
                     String line;
                     while((line = br.readLine()) != null){ 
                     	//while there is a line in the bufferedreader and it's not empty
-                    	urlText += line;//add that line to the text of the URL 
+                    urlText = line;//add that line to the text of the URL 
+                    //System.out.println(urlText);
+                    String htmlString = urlText;
+                    Document html = Jsoup.parse(urlText);
+                    //System.out.print(html);
+                    for (Element name : html.select("a[href]")) {
+                    	System.out.println(name.text());
+                    	//showText.setText(name.text());
+                    }
+                    for (Element number : html.select("div.list-animal-id")) {
+                    	System.out.println(number.text());
+                    }
+                    for (Element animal : html.select("div.list-anima-species")) { //"anima" because there is a typo in the HTML
+                    	System.out.println(animal.text());
+                    }
+                    for (Element gender : html.select("div.list-animal-sexSN")) {
+                    	System.out.println(gender.text());
+                    }
+                    for (Element breed : html.select("div.list-animal-breed")) {
+                    	System.out.println(breed.text());
+                    }
+                    for (Element age : html.select("div.list-animal-age")) {
+                    	System.out.println(age.text());
+                    }
+                    for (Element id : html.select("div.list-animal-detail")) {
+                    	System.out.println(id.text());
+                    }
+                    //showText.setText(name.text());
                     }
                     
-                    DataToShow = DataToShow + "\n" + urlText;//prints out the HTML formatting of the webpage to the TextArea
-                    showText.setText(DataToShow);                    
-                
+                   // DataToShow = DataToShow + "\n" + urlText;//prints out the HTML formatting of the webpage to the TextArea
+                   // showText.setText(DataToShow); 
+                    showText.setText("Connection Successful");
+                  
                 } catch (Exception ex) {
-                  //  ex.printStackTrace();
-                    String fail = "Could not connect to chosen website."
-                      		+ "Use different website or try again";
+                  ex.printStackTrace();
+                    String fail = "Could not connect to chosen website.\n"
+                      		+ "Use different website or try again.";
                 	DataToShow = DataToShow + "\n" + fail;
                 	showText.setText(DataToShow); 
                 	/*
@@ -224,13 +262,8 @@ public class WebScraper extends JFrame implements ActionListener {
         	
         });
 		
-		JPanel panNorth = new JPanel();
-		panNorth.setLayout(new FlowLayout());
-		panNorth.add(label);
-		panNorth.add(urlToSearch);
-		panNorth.add(btnFetch);
-		c.add(panNorth, BorderLayout.NORTH);
     } 
+    
     /***********************************************************************/
    
     
@@ -242,12 +275,14 @@ public class WebScraper extends JFrame implements ActionListener {
 	}
     public static void main(String[] args) {
     	ArrayList<ScreenScraper> datapulled = new ArrayList<ScreenScraper>(); //creates an arraylist
+    	URL url = null;
     	WebScraper frm = new WebScraper();
     	frm.setVisible(true); //show the frame
-    	//ScreenScraper.Scrape(frm);
+		//ScreenScraper.Scrape(frm);
 
     }
 }
+
 
 
 
