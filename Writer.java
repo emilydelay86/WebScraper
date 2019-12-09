@@ -1,7 +1,13 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.BufferedWriter;
+
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /*functions that write the data to the screen
  * and saves the data to text file and to json 
@@ -25,4 +31,30 @@ public class Writer {
 			            return false;
 			        }
 			    }
+	   public static boolean writeMembersToJSON(String fname, //DeLay and Maierhofer
+				ArrayList<ScreenScraper> datapulled) { 
+			try {
+	            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fname)));
+	            // create a JSON object for each student
+	            JSONObject MemObj;
+	            JSONArray array = new JSONArray();
+	            for (Members in : datapulled) {
+	                MemObj = new JSONObject();
+	                MemObj.put("First Name", in.getName());
+	                MemObj.put("Last Name", in.getLastname());
+	                int Score = Assessor.tScore(in);
+	                MemObj.put("Score", Score);
+	                String verdict = verdict(in);
+	                MemObj.put("Verdict", verdict);
+	                array.add(MemObj);
+	            }
+	            JSONObject outer = new JSONObject();
+	            outer.put("Customers", array);
+	            pw.println(outer.toJSONString());
+	            pw.close();
+	            return true;
+	        } catch (Exception ex) {
+	            return false;
+	        }
+		}
 }
