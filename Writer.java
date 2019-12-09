@@ -1,7 +1,4 @@
 import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.BufferedWriter;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -36,20 +33,26 @@ public class Writer {
 			try {
 	            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fname)));
 	            // create a JSON object for each student
-	            JSONObject MemObj;
+	            JSONObject Obj;
 	            JSONArray array = new JSONArray();
-	            for (Members in : datapulled) {
-	                MemObj = new JSONObject();
-	                MemObj.put("First Name", in.getName());
-	                MemObj.put("Last Name", in.getLastname());
-	                int Score = Assessor.tScore(in);
-	                MemObj.put("Score", Score);
-	                String verdict = verdict(in);
-	                MemObj.put("Verdict", verdict);
-	                array.add(MemObj);
+	            for (ScreenScraper in : datapulled) {
+	                Obj = new JSONObject();
+	                Obj.put("Name", in.getName());
+	                Obj.put("number", in.getNumber());
+	                Obj.put("animal", in.getAnimal());
+	                Obj.put("gender", in.getGender());
+	                Obj.put("breed", in.getBreed());
+	                Obj.put("age", in.getAge());
+	                Obj.put("id", in.getId());
+	                
+	               // int Score = Assessor.tScore(in);
+	            //    Obj.put("Score", Score);
+	             //   String verdict = verdict(in);
+	             //   Obj.put("Verdict", verdict);
+	                array.add(Obj);
 	            }
 	            JSONObject outer = new JSONObject();
-	            outer.put("Customers", array);
+	           // outer.put("Customers", array);
 	            pw.println(outer.toJSONString());
 	            pw.close();
 	            return true;
