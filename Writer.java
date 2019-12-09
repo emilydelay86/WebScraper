@@ -35,7 +35,7 @@ public class Writer {
 	            // create a JSON object for each student
 	            JSONObject Obj;
 	            JSONArray array = new JSONArray();
-	            for (ScreenScraper in : datapulled) {
+	            for (data in : datapulled) {
 	                Obj = new JSONObject();
 	                Obj.put("Name", in.getName());
 	                Obj.put("number", in.getNumber());
