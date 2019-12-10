@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -56,7 +57,7 @@ public class WebScraper extends JFrame implements ActionListener {
 	 * options are file and help
 	 */
 	private String DataToShow; // this is what the text area will show
-	private JTextArea txaWords;  //  throughout the class
+	//private JTextArea showText;  //  throughout the class
 	 
 	//JTextField txtTextToAdd = new JTextField(20); //i think we need  text field 
 	
@@ -217,44 +218,45 @@ public class WebScraper extends JFrame implements ActionListener {
                     Document html = Jsoup.parse(urlText);
                     //System.out.print(html);
                     ArrayList<data> datapulled = new ArrayList<data>();
-                    String tname=null, tnumber=null, tanimal=null, tgender=null, tbreed=null, tage=null, tid=null;
+                    String tname, tnumber, tanimal, tgender, tbreed, tage, tid;
+                   
                     for (Element name : html.select("a[href]")) {
                     	tname = name.text();
                     	System.out.println(tname);
+                    	
                     }
                     for (Element number : html.select("div.list-animal-id")) {
                     	tnumber = number.text();
-                    	//System.out.println(tnumber);
+                    	System.out.println(tnumber);
                     }
                     for (Element animal : html.select("div.list-anima-species")) { //"anima" because there is a typo in the HTML
                     	tanimal = animal.text();
-                    	//System.out.println(tanimal);
+                    	System.out.println(tanimal);
                     }
                     for (Element gender : html.select("div.list-animal-sexSN")) {
                     	tgender = gender.text();
-                    	//System.out.println(tgender);
+                    	System.out.println(tgender);
                     }
                     for (Element breed : html.select("div.list-animal-breed")) {
                     	tbreed = breed.text();
-                    	//System.out.println(tbreed);
+                    	System.out.println(tbreed);
                     }
                     for (Element age : html.select("div.list-animal-age")) {
                     	tage = age.text();
-                    	//System.out.println(tage);
+                    	System.out.println(tage);
                     }
                     for (Element id : html.select("div.list-animal-detail")) {
                     	tid = id.text();
-                    	//System.out.println(tid);
+                    	System.out.println(tid);
                     }
-                    datapulled.add(new data(tname, tnumber, tanimal, tgender, tbreed, tage, tid));
+                    //datapulled.add(new data(tname, tnumber, tanimal, tgender, tbreed, tage, tid));
                     //System.out.print(datapulled);
                     }
                     
                     
-                   // DataToShow = DataToShow + "\n" + urlText;//prints out the HTML formatting of the webpage to the TextArea
-                   // showText.setText(DataToShow); 
-                    showText.setText("Connection Successful");
-                   //return datapulled;
+                    DataToShow = DataToShow + "\n" + urlText;//prints out the HTML formatting of the webpage to the TextArea
+                    showText.setText("Connection Successful" + DataToShow);
+                    
                   
                 } catch (Exception ex) {
                   ex.printStackTrace();
@@ -298,6 +300,7 @@ public class WebScraper extends JFrame implements ActionListener {
 
     }
 }
+
 
 
 
