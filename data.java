@@ -1,6 +1,12 @@
 //the getters and setters will go in this class
-public class data {
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class data implements Serializable {
 	private String tname, tnumber, tanimal, tgender, tbreed, tage, tid;
+	private ArrayList<data> datapulled;
+	
 
 	public String getName() {
 		return tname;
@@ -74,4 +80,5 @@ public class data {
 				tname, tnumber, tanimal, tgender, tbreed, tage, tid );
 	}
 }
+
 
