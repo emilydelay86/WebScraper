@@ -15,11 +15,11 @@ public class Writer {
 	 * 
 	 */
 	   public static boolean writeToTextFile(String fname,  //write to txt file - 
-			    ArrayList<ScreenScraper> datapulled) {
+			    ArrayList<data> datapulled) {
 		   //still figurig this out its not 100 percent right 
 			        try {
   PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fname)));
-			        for (ScreenScraper m: datapulled) {
+			        for (data m: datapulled) {
 			                pw.println(m);
 			            }
 			            pw.close();
@@ -29,7 +29,7 @@ public class Writer {
 			        }
 			    }
 	   public static boolean writeMembersToJSON(String fname, //DeLay and Maierhofer
-				ArrayList<ScreenScraper> datapulled) { 
+				ArrayList<data> datapulled) { 
 			try {
 	            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fname)));
 	            // create a JSON object for each student
