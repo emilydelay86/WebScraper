@@ -15,11 +15,10 @@ public class Writer {
 	 * 
 	 */
 	   public static boolean writeToTextFile(String fname,  //write to txt file - 
-			    ArrayList<data> datapulled) {
-		   //still figurig this out its not 100 percent right 
+			    ArrayList<Cats> datapulled) {
 			        try {
   PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fname)));
-			        for (data m: datapulled) {
+			        for (Cats m: datapulled) {
 			                pw.println(m);
 			            }
 			            pw.close();
@@ -28,14 +27,15 @@ public class Writer {
 			            return false;
 			        }
 			    }
-	   public static boolean writeMembersToJSON(String fname, //DeLay and Maierhofer
-				ArrayList<data> datapulled) { 
+	   
+	   public static boolean writeCatsToJSON(String fname, //DeLay and Maierhofer
+				ArrayList<Cats> datapulled) { 
 			try {
 	            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fname)));
 	            // create a JSON object for each student
 	            JSONObject Obj;
 	            JSONArray array = new JSONArray();
-	            for (data in : datapulled) {
+	            for (Cats in : datapulled) {
 	                Obj = new JSONObject();
 	                Obj.put("Name", in.getName());
 	                Obj.put("number", in.getNumber());
@@ -44,15 +44,10 @@ public class Writer {
 	                Obj.put("breed", in.getBreed());
 	                Obj.put("age", in.getAge());
 	                Obj.put("id", in.getId());
-	                
-	               // int Score = Assessor.tScore(in);
-	            //    Obj.put("Score", Score);
-	             //   String verdict = verdict(in);
-	             //   Obj.put("Verdict", verdict);
 	                array.add(Obj);
 	            }
 	            JSONObject outer = new JSONObject();
-	           // outer.put("Customers", array);
+	            outer.put("Cats", array);
 	            pw.println(outer.toJSONString());
 	            pw.close();
 	            return true;
