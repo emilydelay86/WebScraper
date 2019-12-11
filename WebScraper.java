@@ -61,7 +61,7 @@ public class WebScraper extends JFrame implements ActionListener {
 	 
 	//JTextField txtTextToAdd = new JTextField(20); //i think we need  text field 
 
-	private ArrayList<data> datapulled;
+	private ArrayList<Cats> forAdoption;
 	
     public void setupMenu() { //this sets up the menu 
     	DataToShow = ""; //got to set it to empty 
@@ -115,7 +115,7 @@ public class WebScraper extends JFrame implements ActionListener {
     }
     /***********************************************************************/
     public WebScraper() {
-    	datapulled=new ArrayList<data>();
+    	forAdoption =new ArrayList<Cats>();
         // set up the look inside the constructor
         setTitle("Web Scraper");
         setBounds(50,100,400,300); 
@@ -140,11 +140,19 @@ public class WebScraper extends JFrame implements ActionListener {
         btnSave.addActionListener(bh);
         //c.add(btnSave,BorderLayout.NORTH);
         panSouth.add(btnSave);
-        
+        Scanner sc = new Scanner(System.in);
         btnSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            //	Writer.writeToTextFile(
-             //action of the save to text button will go here
+            	try {
+            		//Please look at Eclipse console after pressing button
+            		System.out.println("Enter the name of the text file you want to save to: ");
+            		String fname = sc.nextLine();
+                	Writer.writeToTextFile(fname, forAdoption);
+                	//probably in computer's download 
+                	System.out.println("Successfully saved to a text file.");
+            	} catch (Exception ex) {
+            		System.out.println("Could not save as text file.");
+            	}
             }
         });
         
@@ -163,7 +171,17 @@ public class WebScraper extends JFrame implements ActionListener {
         
         btnSaveJSON.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-             //action of the save to JSON button will go here
+            	try {
+            		//Please look at Eclipse console after pressing button
+            		System.out.println("Enter the name of the JSON file you want to save to: ");
+            		String fname = sc.nextLine();
+            		Writer.writeCatsToJSON(fname, forAdoption);
+            		//probably in computer's download file
+            		System.out.println("Successfully saved to JSON file");
+            	} catch (Exception ex ) {
+            		System.out.println("Could not save as a JSON file.");
+            	}
+             
             }
         });
         
@@ -172,20 +190,7 @@ public class WebScraper extends JFrame implements ActionListener {
         btnHelp.addActionListener(this);
         setupMenu(); 
         /***********************************************************************/
-    /*    JButton btnAddData = new JButton("Add text");
-        //still working on this this isnt 100 percent right
         
-        btnAddData.addActionListener(new ActionListener() { //the button that will make the data show to screen
-        	
-            public void actionPerformed(ActionEvent e) {
-                String data = txtTextToAdd.getText(); 
-                DataToShow = DataToShow + "\n" + data;
-                txaWords.setText(DataToShow);
-            }
-            
-        }); */
-        
-        /***********************************************************************/
         /**
     	 * @author Mackenzie 
     	 * creates the URL text field and fetch 
@@ -253,9 +258,9 @@ public class WebScraper extends JFrame implements ActionListener {
                     if (tid.length() > 0 && tage.length() > 0 && tbreed.length() > 0 && 
                     tgender.length() > 0 && tanimal.length() > 0 && tnumber.length() > 0 && 
                     tname.length() > 0) {
-                    	data oneAnimal = new data(tname, tnumber, tanimal, tgender, tbreed, tage, tid);
+                    	Cats oneAnimal = new Cats(tname, tnumber, tanimal, tgender, tbreed, tage, tid);
                     	System.out.println(oneAnimal);
-                    	datapulled.add(oneAnimal );
+                    	forAdoption.add(oneAnimal );
                     	tname="";
                     	tnumber="";
                     	tanimal="";
@@ -264,11 +269,10 @@ public class WebScraper extends JFrame implements ActionListener {
                     	tage ="";
                     	tid="";
                     }
-                    //System.out.print(datapulled);
+                    
                     }
                     
-                    
-                    DataToShow = DataToShow + "\n" + datapulled;//prints out the HTML formatting of the webpage to the TextArea
+                    DataToShow = DataToShow + "\n" + forAdoption;//prints out the HTML formatting of the webpage to the TextArea
                     showText.setText("Connection Successful" + DataToShow);
                     
                   
@@ -304,9 +308,6 @@ public class WebScraper extends JFrame implements ActionListener {
     public static void main(String[] args) {
     	URL url = null;
     	WebScraper frm = new WebScraper();
-    	//for (data d : datapulled) {
-    	//	System.out.println(d);
-    	//}
     	frm.setVisible(true); //show the frame
     	
 		
