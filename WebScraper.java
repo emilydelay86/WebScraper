@@ -3,10 +3,22 @@
  * main class
  */
 //use this website owo
-
 //http://ws.petango.com/webservices/adoptablesearch/wsAdoptableAnimals
 //.aspx?species=Cat&sex=A&agegroup=All&onhold=A&orderby=ID&colnum=3&AuthKey=rqvr
 //5d02qw0dcgh571j141rdbpwtpfpgvadyf1d1cnadynl3m4
+
+/*
+ * this program takes in the website listed above and allows the user
+ * to be able to save the data to a text file or json file
+ * and it also shows the data to the screen
+ * 
+ */
+/*
+ * when saving a file (json or text) after pressing the button please look
+ * at consel. Thanks.
+ * 
+ * 
+ */
 import java.awt.Container;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -84,8 +96,8 @@ public class WebScraper extends JFrame implements ActionListener {
                 
         });
             
-        JMenu mnuhelp = new JMenu("Help");
-        JMenuItem miabout = new JMenuItem("About");
+        JMenu mnuhelp = new JMenu("Help"); //help button
+        JMenuItem miabout = new JMenuItem("About"); //about button
         miabout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,"This project was created by"
@@ -93,13 +105,16 @@ public class WebScraper extends JFrame implements ActionListener {
 						+ " Welcome to a program that takes in "
 						+ " data from a wesbite and has the option to save it to"
 						+ " a text or a json file.");
+				/*
+				 * button tells a little bit about the authors and the program
+				 */
 
 			}
 		});
         
       
         //JMenuItem miExit = new JMenuItem("Exit");
-        miExit.addActionListener(new ActionListener() {
+        miExit.addActionListener(new ActionListener() { //exit button
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
@@ -112,6 +127,7 @@ public class WebScraper extends JFrame implements ActionListener {
         mnuhelp.add(miabout);
 		mbar.add(mnuhelp);
 		setJMenuBar(mbar);
+		//sets up the menu
     }
     /***********************************************************************/
     public WebScraper() {
@@ -152,6 +168,12 @@ public class WebScraper extends JFrame implements ActionListener {
                 	System.out.println("Successfully saved to a text file.");
             	} catch (Exception ex) {
             		System.out.println("Could not save as text file.");
+            		/*
+            		 * this button saves the data to a text file
+            		 * it prompts to console on eclipse for the user to type in
+            		 * a text file name. after doing so it will prompt user it was saved
+            		 * or if it could not save
+            		 */
             	}
             }
         });
@@ -181,6 +203,12 @@ public class WebScraper extends JFrame implements ActionListener {
             	} catch (Exception ex ) {
             		System.out.println("Could not save as a JSON file.");
             	}
+            	/*
+        		 * this button saves the data to a json file
+        		 * it prompts to console on eclipse for the user to type in
+        		 * a json file name. after doing so it will prompt user it was saved
+        		 * or if it could not save
+        		 */
              
             }
         });
@@ -252,13 +280,23 @@ public class WebScraper extends JFrame implements ActionListener {
                     	System.out.println(tage);
                     }
                     for (Element id : html.select("div.list-animal-detail")) {
+                    	
+                    	
                     	tid = id.text();
                     	System.out.println(tid);
+                    	/*
+                    	 * parses through the html from
+                    	 * the website in order to print the info clearer 
+                    	 * 
+                    	 */
                     }
                     if (tid.length() > 0 && tage.length() > 0 && tbreed.length() > 0 && 
                     tgender.length() > 0 && tanimal.length() > 0 && tnumber.length() > 0 && 
-                    tname.length() > 0) {
+                    tname.length() > 0) { 
+                    	//if variables have data
                     	Cats oneAnimal = new Cats(tname, tnumber, tanimal, tgender, tbreed, tage, tid);
+                    	//adds 1 animal to array
+                    	//before it loops through again
                     	System.out.println(oneAnimal);
                     	forAdoption.add(oneAnimal );
                     	tname="";
@@ -269,7 +307,8 @@ public class WebScraper extends JFrame implements ActionListener {
                     	tage ="";
                     	tid="";
                     }
-                    
+                    //sets variables to empty before it goes nack through
+                    //contructor 
                     }
                     
                     DataToShow = DataToShow + "\n" + forAdoption;//prints out the HTML formatting of the webpage to the TextArea
@@ -314,12 +353,3 @@ public class WebScraper extends JFrame implements ActionListener {
 
     }
 }
-
-
-
-
-
-
-
-
-
