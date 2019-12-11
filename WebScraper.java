@@ -60,6 +60,8 @@ public class WebScraper extends JFrame implements ActionListener {
 	//private JTextArea showText;  //  throughout the class
 	 
 	//JTextField txtTextToAdd = new JTextField(20); //i think we need  text field 
+
+	private ArrayList<data> datapulled;
 	
     public void setupMenu() { //this sets up the menu 
     	DataToShow = ""; //got to set it to empty 
@@ -113,6 +115,7 @@ public class WebScraper extends JFrame implements ActionListener {
     }
     /***********************************************************************/
     public WebScraper() {
+    	datapulled=new ArrayList<data>();
         // set up the look inside the constructor
         setTitle("Web Scraper");
         setBounds(50,100,400,300); 
@@ -200,6 +203,7 @@ public class WebScraper extends JFrame implements ActionListener {
 		c.add(panNorth, BorderLayout.NORTH);
 		btnFetch.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+                String tname="", tnumber="", tanimal="", tgender="", tbreed="", tage="", tid="";
         		try {
         			//String data = urlToSearch.getText();
                     URL url = new URL(urlToSearch.getText());
@@ -208,8 +212,7 @@ public class WebScraper extends JFrame implements ActionListener {
                     		new InputStreamReader(uconn.getInputStream()));
                     
                     String urlText = "";
-                    String line;
-                    
+                    String line;                    
                     while((line = br.readLine()) != null){ 
                     	//while there is a line in the bufferedreader and it's not empty
                     urlText = line;//add that line to the text of the URL 
@@ -217,8 +220,6 @@ public class WebScraper extends JFrame implements ActionListener {
                     String htmlString = urlText;
                     Document html = Jsoup.parse(urlText);
                     //System.out.print(html);
-                    ArrayList<data> datapulled = new ArrayList<data>();
-                    String tname, tnumber, tanimal, tgender, tbreed, tage, tid;
                    
                     for (Element name : html.select("a[href]")) {
                     	tname = name.text();
@@ -249,12 +250,25 @@ public class WebScraper extends JFrame implements ActionListener {
                     	tid = id.text();
                     	System.out.println(tid);
                     }
-                    //datapulled.add(new data(tname, tnumber, tanimal, tgender, tbreed, tage, tid));
+                    if (tid.length() > 0 && tage.length() > 0 && tbreed.length() > 0 && 
+                    tgender.length() > 0 && tanimal.length() > 0 && tnumber.length() > 0 && 
+                    tname.length() > 0) {
+                    	data oneAnimal = new data(tname, tnumber, tanimal, tgender, tbreed, tage, tid);
+                    	System.out.println(oneAnimal);
+                    	datapulled.add(oneAnimal );
+                    	tname="";
+                    	tnumber="";
+                    	tanimal="";
+                    	tgender="";
+                    	tbreed="";
+                    	tage ="";
+                    	tid="";
+                    }
                     //System.out.print(datapulled);
                     }
                     
                     
-                    DataToShow = DataToShow + "\n" + urlText;//prints out the HTML formatting of the webpage to the TextArea
+                    DataToShow = DataToShow + "\n" + datapulled;//prints out the HTML formatting of the webpage to the TextArea
                     showText.setText("Connection Successful" + DataToShow);
                     
                   
@@ -288,7 +302,6 @@ public class WebScraper extends JFrame implements ActionListener {
 		
 	}
     public static void main(String[] args) {
-    	//ArrayList<data> datapulled = new ArrayList<data>(); //creates an arraylist
     	URL url = null;
     	WebScraper frm = new WebScraper();
     	//for (data d : datapulled) {
