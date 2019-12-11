@@ -5,50 +5,48 @@ import java.util.ArrayList;
 
 public class data implements Serializable {
 	private String tname, tnumber, tanimal, tgender, tbreed, tage, tid;
-	private ArrayList<data> datapulled;
-	
 
 	public String getName() {
 		return tname;
 	}
 	public void setName(String name) {
-		this.tname = tname;
+		this.tname = name;
 	}
 	public String getNumber() {
 		return tnumber;
 	}
 	public void setNumber(String number) {
-		this.tnumber = tnumber;
+		this.tnumber = number;
 	}
 	public String getAnimal() {
 		return tanimal;
 	}
 	public void setAnimal(String animal) {
-		this.tanimal = tanimal;
+		this.tanimal = animal;
 	}
 	public String getGender() {
 		return tgender;
 	}
 	public void setGender(String gender) {
-		this.tgender = tgender;
+		this.tgender = gender;
 	}
 	public String getBreed() {
 		return tbreed;
 	}
 	public void setBreed(String breed) {
-		this.tbreed = tbreed;
+		this.tbreed = breed;
 	}
 	public String getAge() {
 		return tage;
 	}
 	public void setAge(String age) {
-		this.tage = tage;
+		this.tage = age;
 	}
 	public String getId() {
 		return tid;
 	}
 	public void setId(String id) {
-		this.tid = tid;
+		this.tid = id;
 	}
 	
 	public data() {
@@ -76,7 +74,7 @@ public class data implements Serializable {
 	
 	@Override
 	public String toString() {
-		return String.format("%s, %s, %s, %s, %s, %s",
+		return String.format("%s, %s, %s, %s, %s, %s, %s",
 				tname, tnumber, tanimal, tgender, tbreed, tage, tid );
 	}
 }
